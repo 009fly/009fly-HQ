@@ -2,4 +2,4 @@
 /* Keep anchored sections flush beneath the fixed header and ticker. */
 #intel,#music,#management,#portfolio,#services,#contact{scroll-margin-top:106px;scroll-padding-top:0}@media(max-width:800px){#intel,#music,#management,#portfolio,#services,#contact{scroll-margin-top:96px}}
 
-.hero-role{color:#f2d400}.hero-copy-role{color:#f2d400}@media(min-width:801px){.latest-video-link{display:block;margin-top:18px}.music-section{padding-top:120px;padding-bottom:120px}.management{padding-top:120px;padding-bottom:120px}}
+.hero-role{color:#f2d400}.hero-copy-role{color:#f2d400}@media(min-width:801px){.hero-meta{position:absolute;top:24vh;left:4vw;right:4vw}.latest-video-link{display:block;margin-top:18px}.music-section{padding-top:120px;padding-bottom:120px}.management{padding-top:120px;padding-bottom:120px}}
