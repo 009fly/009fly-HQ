@@ -37,3 +37,6 @@
   #contact .contact-body{flex:1;min-height:0;justify-content:center}
   #contact .contact-footer{flex-shrink:0}
 }
+
+/* Keep the live-performance qualifier on its own line without changing link spacing. */
+#intel .performance-link .performance-subtitle{display:block;font:inherit;letter-spacing:inherit;margin:5px 0 0;color:inherit}
