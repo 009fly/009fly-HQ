@@ -20,3 +20,10 @@
 
 /* Visually center the Management description above its three-link row on desktop. */
 @media(min-width:801px){#management .section-copy>p{transform:none;width:100%;max-width:520px;text-align:center}}
+
+/* Desktop Portfolio + Services: header and divider match Latest Intel; fill the visible viewport. */
+@media(min-width:801px){
+  #portfolio.gateway{min-height:calc(100svh - 106px)}
+  #portfolio .gateway-card{min-height:0;padding-top:20px;padding-bottom:35px}
+  #portfolio .gateway-card>.mono:first-child{display:block;width:100%;padding-bottom:16px;border-bottom:1px solid #292929}
+}
