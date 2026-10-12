@@ -2,7 +2,7 @@
 /* Keep anchored sections flush beneath the fixed header and ticker. */
 #intel,#music,#management,#portfolio,#services,#contact{scroll-margin-top:106px;scroll-padding-top:0}@media(max-width:800px){#intel,#music,#management,#portfolio,#services,#contact{scroll-margin-top:96px}}
 
-.hero-role{color:#f2d400}.hero-copy-role{color:#f2d400}@media(min-width:801px){#intel,#music{scroll-margin-top:0}.hero{height:100svh;min-height:0;padding-top:106px;padding-bottom:20px;display:grid;grid-template-rows:minmax(0,1fr) auto minmax(0,1fr);justify-content:initial}.hero-meta{align-self:center;transform:none;margin:0}.hero-copy{align-self:center;margin:0}.hero-bottom{align-self:center;align-items:center;transform:translateY(8px)}.hero-left-meta{margin-left:9px}.hero-bottom p{margin-left:9px}.latest-video-link{display:block;margin-top:18px}.music-section{padding-top:120px;padding-bottom:120px}.management{padding-top:120px;padding-bottom:120px}}
+.hero-role{color:#f2d400}.hero-copy-role{color:#f2d400}@media(min-width:801px){#intel,#music,#management{scroll-margin-top:0}.hero{height:100svh;min-height:0;padding-top:106px;padding-bottom:20px;display:grid;grid-template-rows:minmax(0,1fr) auto minmax(0,1fr);justify-content:initial}.hero-meta{align-self:center;transform:none;margin:0}.hero-copy{align-self:center;margin:0}.hero-bottom{align-self:center;align-items:center;transform:translateY(8px)}.hero-left-meta{margin-left:9px}.hero-bottom p{margin-left:9px}.latest-video-link{display:block;margin-top:18px}.music-section{padding-top:120px;padding-bottom:120px}.management{padding-top:120px;padding-bottom:120px}}
 
 /* Consistent Latest Intel heading and link rows. */
 #intel .intel-card-links{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:28px}
