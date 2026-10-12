@@ -117,3 +117,12 @@
   #portfolio .gateway-card p{margin:28px 0 0;white-space:normal;max-width:100%}
   #portfolio .gateway-card .button{margin-top:30px}
 }
+
+/* Mobile Contact: align with other section headers and keep contact details and footer visible. */
+@media(max-width:800px){
+  #contact{min-height:calc(100svh - 96px);padding:22px 22px 32px;display:flex;flex-direction:column}
+  #contact .contact-body{flex:1;min-height:0;justify-content:center}
+  #contact .contact-body h2{margin:0 0 30px}
+  #contact .contact-handle{margin:0 0 18px}
+  #contact .contact-footer{flex-shrink:0;margin-top:36px}
+}
