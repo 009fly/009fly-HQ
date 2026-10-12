@@ -85,3 +85,13 @@
   #music .section-copy>p:first-child{margin:0;line-height:1.6}
   #music .music-links{margin-top:26px;gap:18px}
 }
+
+/* Mobile Management: compact section flow, preserving the headline and artist links. */
+@media(max-width:800px){
+  #management{padding-top:22px;padding-bottom:56px}
+  #management .management-body{display:block}
+  #management .management-body h2{margin:44px 0 28px}
+  #management .section-copy{padding:0}
+  #management .section-copy>p{margin:0;line-height:1.6}
+  #management .management-links{margin-top:24px}
+}
