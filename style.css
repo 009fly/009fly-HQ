@@ -95,3 +95,25 @@
   #management .section-copy>p{margin:0;line-height:1.6}
   #management .management-links{margin-top:24px}
 }
+
+/* Mobile Portfolio + Services: consistent compact stacked panels. */
+@media(max-width:800px){
+  #portfolio.gateway{display:grid;grid-template-columns:minmax(0,1fr);padding:0}
+  #portfolio .gateway-card{
+    min-height:0;
+    padding:22px 22px 44px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+  }
+  #portfolio .gateway-card>.mono:first-child{
+    display:block;
+    width:100%;
+    padding-bottom:16px;
+    border-bottom:1px solid #292929;
+  }
+  #portfolio .gateway-card h2{margin:44px 0 0}
+  #portfolio .gateway-card p{margin:28px 0 0;white-space:normal;max-width:100%}
+  #portfolio .gateway-card .button{margin-top:30px}
+}
