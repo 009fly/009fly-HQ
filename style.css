@@ -8,3 +8,8 @@
 #intel .intel-card-links{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:28px}
 #intel .intel-card-links .text-link{display:inline-block;margin:0}
 @media(min-width:801px){#intel .intel-card.featured h2{margin-top:47px}#intel .intel-card:not(.featured) .intel-card-links{position:absolute;top:245px;left:38px;margin-top:0}}
+
+/* Match Music + Visuals link spacing to Latest Intel without changing other sections. */
+#music .music-links{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:28px}
+#music .music-links .text-link{margin-top:0}
+@media(min-width:801px){#music .music-body>div{transform:translateY(-24px)}}
