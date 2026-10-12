@@ -75,3 +75,13 @@
   #intel .intel-card:not(.featured)>p{margin:0}
   #intel .intel-card:not(.featured) .intel-card-links{position:static;margin-top:24px;gap:18px}
 }
+
+/* Mobile Music + Visuals: compact editorial flow below the ticker. */
+@media(max-width:800px){
+  #music{padding-top:22px;padding-bottom:56px}
+  #music .music-body{display:block;min-height:0}
+  #music .music-body h2{margin:44px 0 28px}
+  #music .section-copy{padding:0}
+  #music .section-copy>p:first-child{margin:0;line-height:1.6}
+  #music .music-links{margin-top:26px;gap:18px}
+}
