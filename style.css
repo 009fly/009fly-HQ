@@ -61,3 +61,17 @@
   .hero-bottom{position:static}
   .hero-bottom .circle-link{flex:none;position:absolute;bottom:30px;left:22px;z-index:2}
 }
+
+/* Mobile Latest Intel: tighter landing, compact featured card, consistent detail-card spacing. */
+@media(max-width:800px){
+  #intel{padding-top:22px;padding-bottom:72px}
+  #intel .intel-grid{margin-top:28px}
+  #intel .intel-card{min-height:0;padding:26px 24px 30px}
+  #intel .intel-card.featured{min-height:320px;padding:26px 24px 42px}
+  #intel .intel-card.featured h2{font-size:clamp(36px,11vw,48px);margin:28px 0 20px}
+  #intel .intel-card.featured p{margin:0}
+  #intel .intel-card.featured .card-line{left:24px;bottom:19px}
+  #intel .intel-card:not(.featured) h3{margin:28px 0 14px}
+  #intel .intel-card:not(.featured)>p{margin:0}
+  #intel .intel-card:not(.featured) .intel-card-links{position:static;margin-top:24px;gap:18px}
+}
