@@ -30,3 +30,10 @@
 
 /* Optically align Portfolio and Services descriptions on desktop. */
 @media(min-width:801px){#portfolio .gateway-card>p{min-height:4.8em;margin-top:0;margin-bottom:0}#portfolio .gateway-card:first-child .portfolio-note{transform:none}}
+
+/* Desktop Contact: same ticker clearance and viewport fit as the other menu sections. */
+@media(min-width:801px){
+  #contact{min-height:calc(100svh - 106px);padding:20px 4vw 30px;display:flex;flex-direction:column}
+  #contact .contact-body{flex:1;min-height:0;justify-content:center}
+  #contact .contact-footer{flex-shrink:0}
+}
