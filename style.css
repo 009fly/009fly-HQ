@@ -17,3 +17,6 @@
 /* Match the Management link row's right edge to the comma after 'creative direction,' on desktop. */
 /* Evenly center the three Management links under the paragraph on desktop. */
 @media(min-width:801px){.management-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:520px;gap:0;justify-content:initial}.management-links .text-link{justify-self:center;white-space:nowrap}}
+
+/* Visually center the Management description above its three-link row on desktop. */
+@media(min-width:801px){#management .section-copy>p{transform:translateX(48px)}}
