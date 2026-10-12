@@ -1,0 +1,40 @@
+name: Build favicon assets
+on:
+  push:
+    paths:
+      - favicon.svg
+      - .github/workflows/build-favicon.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install Pillow cairosvg
+      - name: Generate favicon PNG and ICO sizes
+        run: |
+          python - <<'PY'
+          from io import BytesIO
+          from pathlib import Path
+          from PIL import Image
+          import cairosvg
+          svg=Path("favicon.svg").read_bytes()
+          master=Image.open(BytesIO(cairosvg.svg2png(bytestring=svg,output_width=1024,output_height=1024))).convert("RGB")
+          for size,name in [(16,"favicon-16x16.png"),(32,"favicon-32x32.png"),(180,"apple-touch-icon.png"),(192,"android-chrome-192x192.png"),(512,"android-chrome-512x512.png")]:
+              master.resize((size,size),Image.Resampling.LANCZOS).save(name,optimize=True)
+          master.save("favicon.ico",format="ICO",sizes=[(16,16),(32,32),(48,48),(64,64)])
+          PY
+      - name: Commit generated icons
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate static 009FLY browser and touch icons"
+            git push
+          fi
