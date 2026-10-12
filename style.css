@@ -58,5 +58,6 @@
   .hero h1{font-size:clamp(36px,11vw,72px);line-height:.88;letter-spacing:-.075em}
   .hero-bottom{grid-row:4;align-self:start;margin-top:24px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;flex-wrap:nowrap}
   .hero-bottom p{margin:0;max-width:100%;white-space:normal;font-size:12px;line-height:1.6}
-  .hero-bottom .circle-link{flex:none}
+  .hero-bottom{position:static}
+  .hero-bottom .circle-link{flex:none;position:absolute;bottom:30px;left:22px;z-index:2}
 }
