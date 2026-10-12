@@ -40,3 +40,23 @@
 
 /* Keep the live-performance qualifier on its own line without changing link spacing. */
 #intel .performance-link .performance-subtitle{display:block;font:inherit;letter-spacing:inherit;margin:5px 0 0;color:inherit}
+
+/* Mobile homepage refinements; desktop rules remain unchanged. */
+@media(max-width:800px){
+  .hero{
+    min-height:100svh;
+    padding:120px 22px 30px;
+    display:grid;
+    grid-template-rows:auto minmax(0,1fr) auto;
+    justify-content:initial;
+    row-gap:22px;
+  }
+  .hero-meta{align-self:start}
+  .hero-meta .hero-left-meta .hero-role{display:inline;color:#f2d400}
+  .hero-meta .hero-location{display:none}
+  .hero-copy{align-self:center;margin:0;min-width:0}
+  .hero h1{font-size:clamp(36px,11vw,72px);line-height:.88;letter-spacing:-.075em}
+  .hero-bottom{align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:18px;flex-wrap:nowrap}
+  .hero-bottom p{margin:0;max-width:100%;white-space:normal;font-size:12px;line-height:1.6}
+  .hero-bottom .circle-link{flex:none}
+}
