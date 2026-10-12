@@ -29,4 +29,4 @@
 }
 
 /* Optically align Portfolio and Services descriptions on desktop. */
-@media(min-width:801px){#portfolio .gateway-card:first-child .portfolio-note{transform:translateY(-18px)}}
+@media(min-width:801px){#portfolio .gateway-card>p{min-height:4.8em;margin-top:0;margin-bottom:0}#portfolio .gateway-card:first-child .portfolio-note{transform:none}}
