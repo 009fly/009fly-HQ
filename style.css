@@ -138,10 +138,12 @@
   .release-log summary:focus-visible{outline:1px solid #f2d400;outline-offset:6px}
   .release-log-plus{font-size:16px;line-height:1;display:inline-block;transition:transform .2s}
   .release-log[open] .release-log-plus{transform:rotate(45deg)}
-  .release-log-panel{position:absolute;bottom:calc(100% + 22px);left:50%;transform:translateX(-50%);width:min(490px,85vw);max-height:min(55vh,450px);overflow-y:auto;background:#101010;border:1px solid #373737;box-shadow:0 18px 55px rgba(0,0,0,.65);padding:24px 26px;z-index:12;color:#c8c8c8;letter-spacing:normal}
+  .release-log-panel{position:absolute;bottom:calc(100% + 22px);left:50%;transform:translateX(-50%);width:min(490px,85vw);max-height:min(70vh,520px);display:flex;flex-direction:column;overflow:hidden;background:#101010;border:1px solid #373737;box-shadow:0 18px 55px rgba(0,0,0,.65);padding:24px 26px;z-index:12;color:#c8c8c8;letter-spacing:normal}
   .release-log-heading{display:flex;justify-content:space-between;gap:16px;color:#f2d400;font-size:10px;letter-spacing:.12em;border-bottom:1px solid #303030;padding-bottom:16px}
   .release-log-heading span:last-child{color:#777}
-  .release-log-entry{padding:19px 0;border-bottom:1px solid #303030}
+    .release-log-entries{min-height:0;max-height:min(360px,calc(70vh - 140px));overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#777 #171717}
+  .release-log-entries:focus-visible{outline:1px solid #f2d400;outline-offset:-1px}
+  .release-log-entry{min-height:120px;padding:19px 0;border-bottom:1px solid #303030}
   .release-log-version{display:block;font-size:10px;letter-spacing:.1em;color:#f2d400;margin-bottom:10px}
   .release-log-entry strong{display:block;color:#f1f1ee;font-family:Inter,Arial,sans-serif;font-size:14px;letter-spacing:-.01em}
   .release-log-entry p{font-family:Inter,Arial,sans-serif;font-size:12px;line-height:1.65;color:#a5a5a5;margin:11px 0 0}
