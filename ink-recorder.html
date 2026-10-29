@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#080808">
+<title>009fly | Mobile Smoke Recorder</title>
+<link rel="stylesheet" href="/hero-ink.css?v=20261029-v5-desktop-rollback">
+<style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:#080808;color:#f4f4f4;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+.hero{height:100svh;min-height:460px;position:relative;overflow:hidden;background:#080808}
+.hero-ink-atmosphere{position:absolute;inset:0}
+#panel{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:10;width:min(95vw,500px);padding:15px 16px 17px;border:1px solid #444;background:rgba(8,8,8,.93);box-shadow:0 8px 30px #000c;border-radius:8px;backdrop-filter:blur(12px)}
+#panel h1{font:700 13px/1.3 Arial,sans-serif;letter-spacing:.08em;color:#f2d400;margin:0 0 8px}
+#status{font:12px/1.45 Arial,sans-serif;color:#ccc;min-height:2em;margin:0 0 12px}
+#actions{display:flex;gap:8px;flex-wrap:wrap}
+button,a.download{font:700 12px Arial,sans-serif;padding:12px 13px;border:1px solid #555;border-radius:5px;background:#f2d400;color:#080808;text-decoration:none;cursor:pointer}
+button.secondary{background:#222;color:#eee}
+button:disabled{opacity:.48;cursor:not-allowed}
+#panel small{display:block;margin-top:10px;font:11px/1.45 Arial,sans-serif;color:#999}
+#show{position:fixed;bottom:20px;right:20px;z-index:12;background:#171717;color:#f2d400;border:1px solid #666;display:none}
+body.hide-ui #panel{display:none}
+body.hide-ui #show{display:block}
+@media(min-width:801px){#panel:before{content:"This recorder is designed for mobile Safari. Open on a phone.";display:block;color:#f2d400;font-size:12px;margin-bottom:8px}}
+</style>
+</head>
+<body>
+<section class="hero" aria-label="The same animated ink shader used on the mobile 009fly homepage">
+  <div class="hero-ink-atmosphere" aria-hidden="true"><canvas id="ink-canvas"></canvas></div>
+</section>
+<div id="panel">
+  <h1>009FLY / MOBILE INK RECORDER</h1>
+  <p id="status">If this message stays visible, this viewer is blocking scripts. Open the HTTPS page in Safari, not a ChatGPT attachment preview.</p>
+  <div id="actions">
+    <button id="record" type="button" disabled>Record 10s</button>
+    <a id="download" class="download" hidden>Download video</a>
+    <button id="hide" class="secondary" type="button">Hide controls</button>
+  </div>
+  <small>This page runs the actual mobile website shader. The built-in iPhone Screen Recording feature captures the entire look, including the CSS layers. The Record button captures the canvas directly where supported.</small>
+</div>
+<button id="show" type="button">Show controls</button>
+<script src="/hero-ink.js?v=20261029-v4-desktop"></script>
+<script>
+(() => {
+  const status=document.getElementById('status'),button=document.getElementById('record');
+  const download=document.getElementById('download');
+  const canvas=document.getElementById('ink-canvas');
+  document.getElementById('hide').addEventListener('click',()=>document.body.classList.add('hide-ui'));
+  document.getElementById('show').addEventListener('click',()=>document.body.classList.remove('hide-ui'));
+  if(window.matchMedia('(min-width:801px)').matches){
+    status.textContent='This exact animation is active on mobile only. Open this page on your phone in Safari.';
+    return;
+  }
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    status.textContent='Reduce Motion is enabled. Disable it temporarily in iPhone accessibility settings to view the animated ink.';
+    return;
+  }
+  if(!window.WebGLRenderingContext){
+    status.textContent='WebGL is unavailable in this viewer. Tap the browser menu and open this URL in Safari.';
+    return;
+  }
+  status.textContent='Initializing mobile ink shader...';
+  let polls=0;
+  const startup=setInterval(()=>{
+    polls++;
+    if(canvas.width>1 && canvas.height>1){
+      clearInterval(startup);
+      const supportsStream=typeof canvas.captureStream==='function';
+      const supportsRecorder=typeof MediaRecorder!=='undefined';
+      status.textContent=supportsStream&&supportsRecorder?
+        'Original mobile ink is running. Tap Record, or use iPhone Screen Recording for the full layered look.':
+        'Original mobile ink is running. Use your phone’s Screen Recording feature to capture it.';
+      button.disabled=!(supportsStream&&supportsRecorder);
+    } else if(polls>40) {
+      clearInterval(startup);
+      status.textContent='The animation could not start here. Open this link in Safari instead of the ChatGPT browser.';
+    }
+  },150);
+  let recording=false;
+  button.addEventListener('click',()=>{
+    if(recording || !window.MediaRecorder || !canvas.captureStream)return;
+    const candidates=['video/mp4;codecs=avc1.42E01E','video/mp4','video/webm;codecs=vp8','video/webm'];
+    const mime=candidates.find(type=>MediaRecorder.isTypeSupported(type));
+    if(!mime){status.textContent='This browser cannot encode the capture. Use iPhone Screen Recording instead.';return;}
+    let recorder,stream;
+    try{
+      stream=canvas.captureStream(30);
+      recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:1300000});
+    }catch(err){status.textContent='Recorder unavailable: '+err.message+'. Use iPhone Screen Recording.';return;}
+    recording=true;button.disabled=true;download.hidden=true;status.textContent='Recording 10 seconds...';
+    const chunks=[];
+    recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    recorder.onstop=()=>{
+      stream.getTracks().forEach(track=>track.stop());
+      recording=false;button.disabled=false;
+      const type=recorder.mimeType||mime;
+      const ext=type.includes('mp4')?'mp4':'webm';
+      const blob=new Blob(chunks,{type});
+      if(download.href&&download.href.startsWith('blob:'))URL.revokeObjectURL(download.href);
+      download.href=URL.createObjectURL(blob);
+      download.download='009fly_mobile_ink_shader_10s.'+ext;
+      download.hidden=false;
+      status.textContent='Capture ready ('+(blob.size/1048576).toFixed(1)+' MB). Tap Download video.';
+    };
+    recorder.onerror=()=>{recording=false;button.disabled=false;status.textContent='Recording failed. Use iPhone Screen Recording.'};
+    try{recorder.start(200)}catch(err){recording=false;button.disabled=false;status.textContent='Recording unavailable: '+err.message;return;}
+    setTimeout(()=>{if(recorder.state!=='inactive')recorder.stop()},10000);
+  });
+})();
+</script>
+</body>
+</html>
