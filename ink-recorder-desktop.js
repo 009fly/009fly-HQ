@@ -13,7 +13,7 @@
   const gl=canvas.getContext('webgl',{alpha:false,antialias:false,preserveDrawingBuffer:false,powerPreference:'high-performance'});
   if(!gl){setStatus('WebGL is unavailable in this browser. Try Chrome or Edge with hardware acceleration enabled.');return;}
   const vertex='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-  const fragment = \`
+  const fragment = `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
 #else
@@ -50,7 +50,7 @@ void main(){
   float vignette=1.-smoothstep(.45,1.4,length(p*vec2(.95,1.)));
   color*=mix(.36,1.,vignette);
   gl_FragColor=vec4(color,1.);
-}\`;
+}`;
   function compile(type,source){
     const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);
     if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){
