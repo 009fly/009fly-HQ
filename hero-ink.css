@@ -7,3 +7,24 @@
 .hero>.hero-meta,.hero>.hero-copy,.hero>.hero-bottom{position:relative;z-index:1}
 @keyframes hero-ink-fallback{from{transform:translate(-4%,0)}to{transform:translate(5%,-4%) scale(1.12)}}
 @media(prefers-reduced-motion:reduce){.hero-ink-atmosphere::before{animation:none}}
+
+/* Desktop-only shader-free layered smoke: avoid horizontal WebGL artifacts. */
+@media(min-width:801px){
+  .hero-ink-atmosphere canvas{display:none}
+  .hero-ink-atmosphere::before{
+    inset:-17%;
+    opacity:.93;
+    filter:blur(36px);
+    background:
+      radial-gradient(ellipse 27% 34% at 18% 37%,rgba(90,90,90,.42),transparent 78%),
+      radial-gradient(ellipse 35% 28% at 65% 30%,rgba(73,73,73,.37),transparent 79%),
+      radial-gradient(ellipse 32% 44% at 84% 69%,rgba(90,90,90,.31),transparent 78%),
+      radial-gradient(ellipse 40% 26% at 39% 77%,rgba(66,66,66,.42),transparent 76%),
+      radial-gradient(ellipse 23% 43% at 55% 51%,rgba(43,43,43,.46),transparent 78%);
+    animation:hero-ink-fallback 18s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  .hero-ink-atmosphere{
+    background:radial-gradient(ellipse at 50% 48%,#141414 0%,#080808 68%,#030303 100%);
+  }
+}
