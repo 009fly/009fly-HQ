@@ -3,6 +3,9 @@
   const hero = document.querySelector('.hero');
   const canvas = hero?.querySelector('.hero-ink-atmosphere canvas');
   if (!hero || !canvas || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Desktop uses CSS atmosphere to avoid GPU-driver WebGL strip artifacts.
+  // Keep the established WebGL ink animation on mobile only.
+  if (matchMedia('(min-width: 801px)').matches) return;
   const gl = canvas.getContext('webgl', {alpha:false, antialias:false, powerPreference:'low-power'});
   if (!gl) return; // CSS smoke fallback remains visible.
   canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); canvas.style.display='none'; }, {once:true});
