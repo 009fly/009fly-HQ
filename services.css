@@ -8,6 +8,4 @@
 .services-grid li{position:relative;padding-left:18px;font:500 10px/1.5 "DM Mono",monospace;letter-spacing:.14em;overflow-wrap:break-word}
 .services-grid li::before{content:"+";position:absolute;left:0;color:#f2d400}
 .services-card .button{margin-top:auto}
-/* Keep the first description sentence on one line on desktop; allow natural wrapping on phones. */
-@media(min-width:1200px){.services-description{width:calc(100% + 4vw)}.services-description p:first-child{white-space:nowrap}}
 @media(max-width:800px){.services-card h2{font-size:clamp(40px,10vw,62px)}.services-grid{gap:12px}.services-grid li{font-size:9px;padding-left:14px}}
