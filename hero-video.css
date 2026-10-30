@@ -9,7 +9,7 @@
     z-index:0;
     pointer-events:none;
     overflow:hidden;
-    background:#080808 url("assets/009fly-hero-ink-poster.jpg") center center / cover no-repeat;
+    background:#080808 url("assets/009fly-2026-hero-poster.jpg") center center / cover no-repeat;
   }
   .hero-video-backdrop>video{
     position:absolute;

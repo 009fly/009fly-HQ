@@ -44,11 +44,11 @@
       video.disablePictureInPicture=true;
       video.setAttribute('aria-hidden','true');
       video.setAttribute('tabindex','-1');
-      video.poster='assets/009fly-hero-ink-poster.jpg';
+      video.poster='assets/009fly-2026-hero-poster.jpg';
       video.addEventListener('playing',()=>video.classList.add('is-playing'),{once:true});
       video.src=smokeMode==='60'
         ? 'assets/009fly-hero-ink-seamless-720p60.mp4?v=20261030-compare'
-        : 'assets/009fly-hero-ink-seamless-720p30.mp4?v=20261030-light';
+        : 'assets/009fly-2026-hero-720p.mp4?v=20261030-new-2026-footage';
       surface.appendChild(video);
     }
     syncPlayback();
