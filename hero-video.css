@@ -4,7 +4,7 @@
 @media(min-width:801px){
   .hero-video-backdrop{
     position:absolute;
-    inset:0;
+    inset:106px 0 0;
     display:block;
     z-index:0;
     pointer-events:none;
@@ -20,7 +20,10 @@
     object-position:center;
     border:0;
     pointer-events:none;
+    opacity:0;
+    transition:opacity .55s ease-out;
   }
+  .hero-video-backdrop>video.is-playing{opacity:1}
   .hero>.hero-meta,.hero>.hero-copy,.hero>.hero-bottom{
     position:relative;
     z-index:1;
