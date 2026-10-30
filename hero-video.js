@@ -4,6 +4,8 @@
   const surface=hero?.querySelector('.hero-video-backdrop');
   if(!hero||!surface)return;
   const desktop=matchMedia('(min-width:801px)');
+  // Diagnostic switches: ?smoke=60 compares the original video, ?smoke=off uses the static poster.
+  const smokeMode=new URLSearchParams(window.location.search).get('smoke');
   const reduced=matchMedia('(prefers-reduced-motion:reduce)');
   let video=null;
   let visible=true;
@@ -19,7 +21,7 @@
     }
   }
   function updateViewport(){
-    const enabled=desktop.matches&&!reduced.matches;
+    const enabled=desktop.matches&&!reduced.matches&&smokeMode!=='off';
     if(!enabled){
       if(video){
         video.pause();
@@ -44,7 +46,9 @@
       video.setAttribute('tabindex','-1');
       video.poster='assets/009fly-hero-ink-poster.jpg';
       video.addEventListener('playing',()=>video.classList.add('is-playing'),{once:true});
-      video.src='assets/009fly-hero-ink-seamless-720p60.mp4?v=20261030-seamless';
+      video.src=smokeMode==='60'
+        ? 'assets/009fly-hero-ink-seamless-720p60.mp4?v=20261030-compare'
+        : 'assets/009fly-hero-ink-seamless-720p30.mp4?v=20261030-light';
       surface.appendChild(video);
     }
     syncPlayback();
