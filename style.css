@@ -59,7 +59,7 @@
   .hero-bottom{grid-row:4;align-self:start;margin-top:24px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;flex-wrap:nowrap}
   .hero-bottom p{margin:0;max-width:100%;white-space:normal;font-size:12px;line-height:1.6}
   .hero-bottom{position:static}
-  .hero-bottom .circle-link{flex:none;position:absolute;bottom:30px;left:22px;z-index:2}
+  .hero-bottom .circle-link{flex:none;position:absolute;top:auto;right:auto;bottom:30px;left:22px;z-index:2;transform:none;margin:0}
 }
 
 /* Mobile Latest Intel: tighter landing, compact featured card, consistent detail-card spacing. */
