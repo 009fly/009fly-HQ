@@ -43,7 +43,8 @@
       video.setAttribute('aria-hidden','true');
       video.setAttribute('tabindex','-1');
       video.poster='assets/009fly-hero-ink-poster.jpg';
-      video.src='assets/009fly-hero-ink-1080p.mp4';
+      video.addEventListener('playing',()=>video.classList.add('is-playing'),{once:true});
+      video.src='assets/009fly-hero-ink-seamless-720p60.mp4?v=20261030-seamless';
       surface.appendChild(video);
     }
     syncPlayback();
