@@ -1,0 +1,31 @@
+/* Isolated desktop-only video backdrop for 009fly HQ.
+   No CSS blur, WebGL, or cursor effects. Mobile shader remains unchanged. */
+.hero-video-backdrop{display:none}
+@media(min-width:801px){
+  .hero-video-backdrop{
+    position:absolute;
+    inset:0;
+    display:block;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+    background:#080808 url("assets/009fly-hero-ink-poster.jpg") center center / cover no-repeat;
+  }
+  .hero-video-backdrop>video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    border:0;
+    pointer-events:none;
+  }
+  .hero>.hero-meta,.hero>.hero-copy,.hero>.hero-bottom{
+    position:relative;
+    z-index:1;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-video-backdrop>video{display:none}
+}
