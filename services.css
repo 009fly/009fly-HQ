@@ -8,4 +8,12 @@
 .services-grid li{position:relative;padding-left:18px;font:500 10px/1.5 "DM Mono",monospace;letter-spacing:.14em;overflow-wrap:break-word}
 .services-grid li::before{content:"+";position:absolute;left:0;color:#f2d400}
 .services-card .button{margin-top:auto}
-@media(max-width:800px){.services-card h2{font-size:clamp(40px,10vw,62px)}.services-grid{gap:12px}.services-grid li{font-size:9px;padding-left:14px}}
+@media(max-width:800px){
+  .services-card h2{font-size:clamp(40px,10vw,62px)}
+  /* Subgrid shares every service-row height between columns, even when labels wrap. */
+  .services-grid{gap:17px 12px;grid-template-rows:repeat(4,auto);align-items:stretch}
+  .services-grid ul{display:grid;grid-row:1 / span 4;grid-template-rows:subgrid;row-gap:17px;min-width:0}
+  .services-grid ul:first-child{grid-column:1}
+  .services-grid ul:last-child{grid-column:2}
+  .services-grid li{font-size:9px;padding-left:14px}
+}
