@@ -23,14 +23,22 @@ jobs:
           python-version: '3.12'
       - name: Install render dependencies
         run: |
-          python -m pip install --disable-pip-version-check "numpy<3" "numba>=0.60" "Pillow>=10"
-          ffmpeg -version | head -1
+          python -m pip install --disable-pip-version-check "numpy<3" "numba>=0.60" "Pillow>=10" "imageio-ffmpeg>=0.5.1"
+          python -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())"
       - name: Produce the exact 1080p/60fps stable ink animation
         run: python scripts/render_009fly_hero.py
       - name: Validate the desktop loop
         run: |
           test -s assets/009fly-hero-ink-1080p.mp4
-          ffprobe -v error -select_streams v:0 -show_entries stream=width,height,avg_frame_rate -show_entries format=duration,size -of default=noprint_wrappers=1 assets/009fly-hero-ink-1080p.mp4
+          python - <<'PY'
+          from pathlib import Path
+          import imageio_ffmpeg
+          path = Path('assets/009fly-hero-ink-1080p.mp4')
+          assert path.stat().st_size > 500000, 'Unexpectedly small video'
+          count, seconds = imageio_ffmpeg.count_frames_and_secs(str(path))
+          print(f'Video: {count} frames, {seconds:.2f} seconds, {path.stat().st_size} bytes')
+          assert count == 600 and abs(seconds - 10.0) < .1
+          PY
       - name: Commit rendered files to the website
         run: |
           git config user.name "github-actions[bot]"

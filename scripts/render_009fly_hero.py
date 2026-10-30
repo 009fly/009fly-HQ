@@ -5,6 +5,7 @@ This script is used only in GitHub Actions, never executed in visitors' browsers
 """
 import math
 import subprocess
+import imageio_ffmpeg
 from pathlib import Path
 
 import numpy as np
@@ -87,7 +88,7 @@ def main():
         (1920, 1080), Image.Resampling.LANCZOS
     ).save(poster, quality=89, optimize=True)
     args = [
-        'ffmpeg', '-y', '-loglevel', 'error',
+        imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-loglevel', 'error',
         '-f', 'rawvideo', '-pix_fmt', 'rgb24',
         '-s', f'{width}x{height}', '-r', str(fps), '-i', '-',
         '-vf', 'scale=1920:1080:flags=lanczos,format=yuv420p',
