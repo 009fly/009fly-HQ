@@ -1,5 +1,5 @@
 /* 009fly / atmospheric ink hero. Isolated from the page's original layout. */
-.hero{isolation:isolate;overflow:hidden}
+@media(max-width:800px){.hero{isolation:isolate;overflow:hidden}}
 .hero-ink-atmosphere{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 43% 54%,#111 0%,#080808 60%,#030303 100%)}
 .hero-ink-atmosphere::before{content:"";position:absolute;inset:-20%;background:radial-gradient(ellipse 48% 36% at 28% 48%,#292929,transparent 78%),radial-gradient(ellipse 40% 42% at 74% 63%,#242424,transparent 78%);filter:blur(45px);opacity:.6;animation:hero-ink-fallback 20s ease-in-out infinite alternate}
 .hero-ink-atmosphere canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -10,3 +10,6 @@
 
 /* Desktop rollback: restore the original lightweight hero background and ticker performance. */
 @media(min-width:801px){.hero-ink-atmosphere{display:none}}
+
+/* Keep the restored mobile smoke behind the corrected arrow layout. */
+@media(max-width:800px){.hero>.hero-bottom{position:static}}
