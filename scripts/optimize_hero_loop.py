@@ -31,3 +31,18 @@ frames,seconds=imageio_ffmpeg.count_frames_and_secs(str(OUTPUT))
 assert frames==510 and abs(seconds-8.5)<0.1, (frames,seconds)
 assert OUTPUT.stat().st_size>200000
 print(f"Ready: {OUTPUT}: {frames} frames, {seconds:.2f}s, {OUTPUT.stat().st_size} bytes")
+
+# The same seamless master, sampled at 30fps: half the video decode workload
+# for desktop browsers while CSS ticker remains independently GPU-animated.
+LIGHT = Path("assets/009fly-hero-ink-seamless-720p30.mp4")
+cmd_light = [
+    imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-hide_banner", "-loglevel", "error",
+    "-i", str(OUTPUT), "-vf", "fps=30,format=yuv420p", "-an",
+    "-c:v", "libx264", "-preset", "medium", "-crf", "19",
+    "-profile:v", "main", "-level", "3.1", "-bf", "0", "-refs", "1",
+    "-pix_fmt", "yuv420p", "-r", "30", "-movflags", "+faststart", str(LIGHT),
+]
+subprocess.run(cmd_light, check=True)
+light_frames, light_seconds = imageio_ffmpeg.count_frames_and_secs(str(LIGHT))
+assert light_frames == 255 and abs(light_seconds - 8.5) < .1, (light_frames, light_seconds)
+print(f"Ready: {LIGHT}: {light_frames} frames, {light_seconds:.2f}s, {LIGHT.stat().st_size} bytes")
