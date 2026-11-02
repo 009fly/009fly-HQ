@@ -128,10 +128,9 @@
 }
 
 
-/* 009fly V1.1: expandable desktop release-history panel. */
-@media(min-width:801px){
-  #contact .contact-footer{position:relative;align-items:center}
-  .release-log{position:relative;color:#888;font:inherit;letter-spacing:inherit}
+/* 009fly release history: shared desktop/mobile footer behavior and styling. */
+#contact .contact-footer{position:relative;align-items:center}
+.release-log{position:relative;color:#888;font:inherit;letter-spacing:inherit}
   .release-log summary{display:flex;align-items:center;gap:10px;list-style:none;cursor:pointer;user-select:none;transition:color .2s}
   .release-log summary::-webkit-details-marker{display:none}
   .release-log summary:hover,.release-log[open] summary{color:#f2d400}
@@ -148,8 +147,27 @@
   .release-log-entry strong{display:block;color:#f1f1ee;font-family:Inter,Arial,sans-serif;font-size:14px;letter-spacing:-.01em}
   .release-log-entry p{font-family:Inter,Arial,sans-serif;font-size:12px;line-height:1.65;color:#a5a5a5;margin:11px 0 0}
   .release-log-end{display:block;color:#686868;font-size:10px;letter-spacing:.09em;padding-top:17px}
+
+/* The mobile log remains in the same center slot in the contact footer.
+   Its dropdown opens upward and stays inside the phone viewport. */
+@media(max-width:800px){
+  #contact .contact-footer{gap:8px}
+  .release-log{display:block;min-width:0}
+  .release-log summary{gap:5px;white-space:nowrap;touch-action:manipulation}
+  .release-log-plus{font-size:14px}
+  .release-log-panel{
+    bottom:calc(100% + 14px);
+    width:min(490px,calc(100vw - 32px));
+    max-height:min(70dvh,520px);
+    padding:18px 16px;
+  }
+  .release-log-heading{font-size:9px;gap:8px;padding-bottom:12px}
+  .release-log-entries{max-height:min(48dvh,350px)}
+  .release-log-entry{min-height:0;padding:16px 0}
+  .release-log-entry strong{font-size:13px}
+  .release-log-entry p{font-size:12px;line-height:1.55}
+  .release-log-end{padding-top:12px}
 }
-@media(max-width:800px){.release-log{display:none}}
 
 /* 009fly performance: prevent clock digit width changes from jostling the ticker. */
 .ticker-time{font-variant-numeric:tabular-nums}
