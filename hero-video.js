@@ -1,6 +1,6 @@
-/* 009fly hero: approved HD 009 animation on desktop and mobile.
- * The previous smoke source is retained solely as an error fallback.
- * Ticker and navigation remain independent of the video. */
+/* 009fly hero: use the new clean-cut HD loop as soon as both optimized assets are available.
+ * The existing HD 009 renders remain in place until the upload is published.
+ * Ticker and navigation stay independent of video playback. */
 (() => {
   const hero = document.querySelector('.hero');
   const surface = hero?.querySelector('.hero-video-backdrop');
@@ -9,12 +9,12 @@
   const mobile = matchMedia('(max-width:800px)');
   const reduced = matchMedia('(prefers-reduced-motion:reduce)');
   const currentSources = {
-    desktop:'assets/009fly-smoke02-desktop-1080p.mp4?v=20261101-smooth60',
-    mobile:'assets/009fly-smoke02-mobile-720p.mp4?v=20261101-smooth30'
-  };
-  const preferredSources = {
     desktop:'assets/009_render_header_desktop_HD_1080p.mp4?v=20261102-hd',
     mobile:'assets/009_render_header_mobile_HD_720p.mp4?v=20261102-hd'
+  };
+  const preferredSources = {
+    desktop:'assets/009fly_cleanloop_desktop_HD_1080p.mp4?v=20261102-cleancut',
+    mobile:'assets/009fly_cleanloop_mobile_HD_720p.mp4?v=20261102-cleancut'
   };
 
   let video = null;
@@ -29,12 +29,16 @@
       if (promise && typeof promise.catch === 'function') promise.catch(() => {});
     }
   }
-  // The verified HD files are deployed. Direct loading avoids a redundant
-  // network HEAD request before playback can start.
-  function chooseSource(viewport) {
-    return preferredSources[viewport];
+  // Probe only the requested viewport so existing visitors keep the current
+  // working HD loop until GitHub Pages actually publishes the replacements.
+  async function chooseSource(viewport) {
+    try {
+      const response = await fetch(preferredSources[viewport], {method: 'HEAD', cache: 'no-store'});
+      if (response.ok) return preferredSources[viewport];
+    } catch (_) {}
+    return currentSources[viewport];
   }
-  function update() {
+  async function update() {
     const token = ++revision;
     if (reduced.matches) {
       if (video) {
@@ -47,7 +51,7 @@
       return;
     }
     const viewport = mobile.matches ? 'mobile' : 'desktop';
-    const source = chooseSource(viewport);
+    const source = await chooseSource(viewport);
     if (token !== revision || reduced.matches) return;
 
     if (!video) {
@@ -76,6 +80,9 @@
       });
       surface.appendChild(video);
     }
+    video.poster = source === preferredSources[viewport]
+      ? 'assets/009fly_cleanloop_poster.jpg?v=20261102-cleancut'
+      : 'assets/009_render_header_poster.jpg?v=20261102';
     if (video.getAttribute('src') !== source) {
       video.classList.remove('is-playing');
       video.src = source;
