@@ -33,7 +33,7 @@ def encode(path, filter_tail, crf, maxrate):
     cmd=[
         ffmpeg,"-y","-hide_banner","-loglevel","error",
         "-ss","0","-t","10","-i",str(src),
-        "-filter_complex",graph+filter_tail+"[v]",
+        "-filter_complex",graph+filter_tail.rstrip(",")+"[v]",
         "-map","[v]","-an","-c:v","libx264",
         "-preset","medium","-crf",str(crf),"-maxrate",maxrate,
         "-bufsize","6M","-pix_fmt","yuv420p",
