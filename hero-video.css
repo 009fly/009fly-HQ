@@ -1,4 +1,4 @@
-/* 009fly approved 009 animated header — lightweight responsive backdrop.
+/* 009fly approved clean-cut video header — uninterrupted video-first backdrop.
    Isolated from ticker and navigation; no canvas/WebGL/blur animation. */
 .hero{isolation:isolate;overflow:hidden}
 .hero-video-backdrop{
@@ -7,7 +7,7 @@
   z-index:0;
   overflow:hidden;
   pointer-events:none;
-  background:#080808 url("assets/009_render_header_poster.jpg?v=20261102") center center / cover no-repeat;
+  background:#080808;
 }
 .hero-video-backdrop>video{
   position:absolute;
@@ -39,7 +39,4 @@
   .hero-video-backdrop::after{
     background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.09) 25%,rgba(0,0,0,.25) 57%,rgba(0,0,0,.62));
   }
-}
-@media(prefers-reduced-motion:reduce){
-  .hero-video-backdrop>video{display:none}
 }
