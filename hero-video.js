@@ -1,8 +1,8 @@
-/* 009fly hero — clean-cut HD 009 animation, mandatory video-first background.
- * No poster image and no deliberate pausing while scrolling or in other tabs.
- * Browser autoplay/background policies can still prevent continuous playback.
- * The previous verified HD animation is retained as a VIDEO-only error fallback.
- * Ticker and navigation remain independent of this player.
+/* 009fly hero — approved desktop clean loop and optimized mobile v2.
+ * Video-only background: no poster or obsolete-video fallback.
+ * No deliberate pause while scrolling or in other tabs.
+ * Browser autoplay/background policies may still suspend playback.
+ * Ticker and navigation stay independent.
  */
 (() => {
   const hero = document.querySelector('.hero');
@@ -12,11 +12,7 @@
   const mobile = matchMedia('(max-width:800px)');
   const sources = {
     desktop: 'assets/009fly_cleanloop_desktop_HD_1080p.mp4?v=20261102-cleancut',
-    mobile: 'assets/009fly_cleanloop_mobile_HD_720p.mp4?v=20261102-cleancut'
-  };
-  const fallbackSources = {
-    desktop: 'assets/009_render_header_desktop_HD_1080p.mp4?v=20261102-hd',
-    mobile: 'assets/009_render_header_mobile_HD_720p.mp4?v=20261102-hd'
+    mobile: 'assets/009_render_mobile_bg_optimized_720x1280.mp4?v=20261102-mobile-v2'
   };
 
   const video = document.createElement('video');
@@ -45,11 +41,6 @@
   video.addEventListener('playing', () => video.classList.add('is-playing'));
   video.addEventListener('error', () => {
     video.classList.remove('is-playing');
-    const fallback = fallbackSources[mobile.matches ? 'mobile' : 'desktop'];
-    if (video.getAttribute('src') === fallback) return;
-    video.src = fallback;
-    video.load();
-    attemptPlay();
   });
 
   function updateSource() {
