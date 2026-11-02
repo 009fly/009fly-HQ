@@ -154,6 +154,11 @@
   #contact .contact-footer{gap:8px}
   .release-log{display:block;min-width:0}
   .release-log summary{gap:5px;white-space:nowrap;touch-action:manipulation}
+  /* iOS Safari can preserve :hover after a tap: closed logs always return grey. */
+  .release-log:not([open]) summary,
+  .release-log:not([open]) summary:hover,
+  .release-log:not([open]) summary:active{color:#888}
+  .release-log[open] summary{color:#f2d400}
   .release-log-plus{font-size:14px}
   .release-log-panel{
     /* Center the expanded log in the visible phone viewport, not the footer item. */
