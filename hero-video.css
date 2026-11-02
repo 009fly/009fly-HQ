@@ -33,6 +33,8 @@
 }
 .hero>.hero-meta,.hero>.hero-copy,.hero>.hero-bottom{position:relative;z-index:1}
 @media(max-width:800px){
+  /* Keep the mobile scroll arrow anchored to the hero, not the bottom copy. */
+  .hero>.hero-bottom{position:static}
   .hero-video-backdrop>video{object-position:center center}
   .hero-video-backdrop::after{
     background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.09) 25%,rgba(0,0,0,.25) 57%,rgba(0,0,0,.62));
