@@ -1,7 +1,6 @@
-/* 009fly hero playback: responsive HD background with safe asset handoff.
- * The approved lightweight 009 render is used once its optimized file is in /assets.
- * Until then, the verified existing smoke asset remains the live fallback.
- * Ticker and navigation animation remain independent of video playback. */
+/* 009fly hero: lightweight approved 009 animation on desktop and mobile.
+ * The previous smoke source is retained solely as an error fallback.
+ * Ticker and navigation remain independent of the video. */
 (() => {
   const hero = document.querySelector('.hero');
   const surface = hero?.querySelector('.hero-video-backdrop');
@@ -14,8 +13,8 @@
     mobile:'assets/009fly-smoke02-mobile-720p.mp4?v=20261101-smooth30'
   };
   const preferredSources = {
-    desktop:'assets/009_render_header_desktop_light.mp4',
-    mobile:'assets/009_render_header_mobile_light.mp4'
+    desktop:'assets/009_render_header_desktop_light.mp4?v=20261102',
+    mobile:'assets/009_render_header_mobile_light.mp4?v=20261102'
   };
 
   let video = null;
@@ -30,16 +29,12 @@
       if (promise && typeof promise.catch === 'function') promise.catch(() => {});
     }
   }
-  async function chooseSource(viewport) {
-    const preferred = preferredSources[viewport];
-    // Small HEAD request, no full-size video download until a valid asset exists.
-    try {
-      const response = await fetch(preferred,{method:'HEAD',cache:'no-store'});
-      if (response.ok) return preferred;
-    } catch (_) {}
-    return currentSources[viewport];
+  // The approved HD files are deployed. Direct loading avoids a redundant
+  // network HEAD request before playback can start.
+  function chooseSource(viewport) {
+    return preferredSources[viewport];
   }
-  async function update() {
+  function update() {
     const token = ++revision;
     if (reduced.matches) {
       if (video) {
@@ -52,7 +47,7 @@
       return;
     }
     const viewport = mobile.matches ? 'mobile' : 'desktop';
-    const source = await chooseSource(viewport);
+    const source = chooseSource(viewport);
     if (token !== revision || reduced.matches) return;
 
     if (!video) {
@@ -65,7 +60,7 @@
       video.preload = 'metadata';
       video.controls = false;
       video.disablePictureInPicture = true;
-      video.poster = 'assets/009fly-smoke02-poster.jpg?v=20261101-smooth';
+      video.poster = 'assets/009_render_header_poster.jpg?v=20261102';
       video.setAttribute('aria-hidden','true');
       video.setAttribute('tabindex','-1');
       video.addEventListener('playing', () => video?.classList.add('is-playing'));
