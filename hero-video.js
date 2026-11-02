@@ -6,8 +6,8 @@
   const mobile = matchMedia('(max-width:800px)');
   const reduced = matchMedia('(prefers-reduced-motion:reduce)');
   const sources = {
-    desktop:'assets/009fly-smoke02-desktop-1080p.mp4?v=20261101',
-    mobile:'assets/009fly-smoke02-mobile-720p.mp4?v=20261101'
+    desktop:'assets/009fly-smoke02-desktop-1080p.mp4?v=20261101-smooth60',
+    mobile:'assets/009fly-smoke02-mobile-720p.mp4?v=20261101-smooth30'
   };
   let video = null;
   let active = true;
@@ -41,7 +41,7 @@
       video.preload = 'metadata';
       video.controls = false;
       video.disablePictureInPicture = true;
-      video.poster = 'assets/009fly-smoke02-poster.jpg';
+      video.poster = 'assets/009fly-smoke02-poster.jpg?v=20261101-smooth';
       video.setAttribute('aria-hidden','true');
       video.setAttribute('tabindex','-1');
       video.addEventListener('playing', () => video?.classList.add('is-playing'));
