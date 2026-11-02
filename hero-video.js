@@ -1,66 +1,69 @@
-/* Desktop-only hero video. No video download/decode on mobile. */
+/* 009fly approved smoke 02: independent lightweight video playback for both viewports. */
 (() => {
-  const hero=document.querySelector('.hero');
-  const surface=hero?.querySelector('.hero-video-backdrop');
-  if(!hero||!surface)return;
-  const desktop=matchMedia('(min-width:801px)');
-  // Diagnostic switches: ?smoke=60 compares the original video, ?smoke=off uses the static poster.
-  const smokeMode=new URLSearchParams(window.location.search).get('smoke');
-  const reduced=matchMedia('(prefers-reduced-motion:reduce)');
-  let video=null;
-  let visible=true;
-  function syncPlayback(){
-    if(!video)return;
-    if(!desktop.matches || reduced.matches || document.hidden || !visible){
+  const hero = document.querySelector('.hero');
+  const surface = hero?.querySelector('.hero-video-backdrop');
+  if (!hero || !surface) return;
+  const mobile = matchMedia('(max-width:800px)');
+  const reduced = matchMedia('(prefers-reduced-motion:reduce)');
+  const sources = {
+    desktop:'assets/009fly-smoke02-desktop-1080p.mp4?v=20261101',
+    mobile:'assets/009fly-smoke02-mobile-720p.mp4?v=20261101'
+  };
+  let video = null;
+  let active = true;
+  function sync() {
+    if (!video) return;
+    if (document.hidden || !active || reduced.matches) {
       video.pause();
-      return;
-    }
-    if(video.paused){
-      const attempt=video.play();
-      if(attempt && typeof attempt.catch==='function')attempt.catch(()=>{});
+    } else if (video.paused) {
+      const promise = video.play();
+      if (promise && typeof promise.catch === 'function') promise.catch(() => {});
     }
   }
-  function updateViewport(){
-    const enabled=desktop.matches&&!reduced.matches&&smokeMode!=='off';
-    if(!enabled){
-      if(video){
+  function update() {
+    if (reduced.matches) {
+      if (video) {
         video.pause();
         video.removeAttribute('src');
         video.load();
         video.remove();
-        video=null;
+        video = null;
       }
       return;
     }
-    if(!video){
-      video=document.createElement('video');
-      video.autoplay=true;
-      video.loop=true;
-      video.muted=true;
-      video.defaultMuted=true;
-      video.playsInline=true;
-      video.preload='auto';
-      video.controls=false;
-      video.disablePictureInPicture=true;
+    if (!video) {
+      video = document.createElement('video');
+      video.muted = true;
+      video.defaultMuted = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.controls = false;
+      video.disablePictureInPicture = true;
+      video.poster = 'assets/009fly-smoke02-poster.jpg';
       video.setAttribute('aria-hidden','true');
       video.setAttribute('tabindex','-1');
-      video.poster='assets/009fly-2026-hero-poster.jpg';
-      video.addEventListener('playing',()=>video.classList.add('is-playing'),{once:true});
-      video.src=smokeMode==='60'
-        ? 'assets/009fly-hero-ink-seamless-720p60.mp4?v=20261030-compare'
-        : 'assets/009fly-2026-hero-720p.mp4?v=20261030-new-2026-footage';
+      video.addEventListener('playing', () => video?.classList.add('is-playing'));
+      video.addEventListener('error', () => video?.classList.remove('is-playing'));
       surface.appendChild(video);
     }
-    syncPlayback();
+    const source = mobile.matches ? sources.mobile : sources.desktop;
+    if (video.getAttribute('src') !== source) {
+      video.classList.remove('is-playing');
+      video.src = source;
+      video.load();
+    }
+    sync();
   }
-  const observer=new IntersectionObserver(entries=>{
-    visible=entries[0].isIntersecting;
-    syncPlayback();
-  },{threshold:0.01});
+  const observer = new IntersectionObserver(entries => {
+    active = !!entries[0]?.isIntersecting;
+    sync();
+  },{threshold:.01});
   observer.observe(hero);
-  document.addEventListener('visibilitychange',syncPlayback);
-  desktop.addEventListener('change',updateViewport);
-  reduced.addEventListener('change',updateViewport);
-  window.addEventListener('pagehide',()=>{if(video)video.pause()},{once:true});
-  updateViewport();
+  document.addEventListener('visibilitychange', sync);
+  mobile.addEventListener('change', update);
+  reduced.addEventListener('change', update);
+  window.addEventListener('pagehide', () => video?.pause(), {once:true});
+  update();
 })();
