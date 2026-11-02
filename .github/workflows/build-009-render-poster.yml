@@ -15,9 +15,15 @@ jobs:
         with:
           ref: main
           persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install standalone FFmpeg
+        run: python -m pip install --disable-pip-version-check imageio-ffmpeg
       - name: Generate JPG fallback from approved animation
         run: |
-          ffmpeg -y -hide_banner -loglevel error -ss 2 -i assets/009_render_header_desktop_light.mp4 -frames:v 1 -vf scale=960:540 -q:v 3 assets/009_render_header_poster.jpg
+          FF=$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')
+          "$FF" -y -hide_banner -loglevel error -ss 2 -i assets/009_render_header_desktop_light.mp4 -frames:v 1 -vf scale=960:540 -q:v 3 assets/009_render_header_poster.jpg
           test -s assets/009_render_header_poster.jpg
       - name: Commit fallback poster
         run: |
