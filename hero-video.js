@@ -1,4 +1,4 @@
-/* 009fly hero: lightweight approved 009 animation on desktop and mobile.
+/* 009fly hero: approved HD 009 animation on desktop and mobile.
  * The previous smoke source is retained solely as an error fallback.
  * Ticker and navigation remain independent of the video. */
 (() => {
@@ -13,8 +13,8 @@
     mobile:'assets/009fly-smoke02-mobile-720p.mp4?v=20261101-smooth30'
   };
   const preferredSources = {
-    desktop:'assets/009_render_header_desktop_light.mp4?v=20261102',
-    mobile:'assets/009_render_header_mobile_light.mp4?v=20261102'
+    desktop:'assets/009_render_header_desktop_HD_1080p.mp4?v=20261102-hd',
+    mobile:'assets/009_render_header_mobile_HD_720p.mp4?v=20261102-hd'
   };
 
   let video = null;
@@ -29,7 +29,7 @@
       if (promise && typeof promise.catch === 'function') promise.catch(() => {});
     }
   }
-  // The approved HD files are deployed. Direct loading avoids a redundant
+  // The verified HD files are deployed. Direct loading avoids a redundant
   // network HEAD request before playback can start.
   function chooseSource(viewport) {
     return preferredSources[viewport];
