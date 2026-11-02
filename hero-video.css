@@ -1,32 +1,41 @@
-/* Isolated desktop-only video backdrop for 009fly HQ.
-   No CSS blur, WebGL, or cursor effects. Mobile shader remains unchanged. */
-.hero-video-backdrop{display:none}
-@media(min-width:801px){
-  .hero-video-backdrop{
-    position:absolute;
-    inset:106px 0 0;
-    display:block;
-    z-index:0;
-    pointer-events:none;
-    overflow:hidden;
-    background:#080808 url("assets/009fly-2026-hero-poster.jpg") center center / cover no-repeat;
-  }
-  .hero-video-backdrop>video{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    border:0;
-    pointer-events:none;
-    opacity:0;
-    transition:opacity .55s ease-out;
-  }
-  .hero-video-backdrop>video.is-playing{opacity:1}
-  .hero>.hero-meta,.hero>.hero-copy,.hero>.hero-bottom{
-    position:relative;
-    z-index:1;
+/* 009fly approved smoke 02 — native HD video background on desktop and mobile.
+   Isolated from ticker and navigation; no canvas/WebGL/blur animation. */
+.hero{isolation:isolate;overflow:hidden}
+.hero-video-backdrop{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  background:#080808 url("assets/009fly-smoke02-poster.jpg") center center / cover no-repeat;
+}
+.hero-video-backdrop>video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center center;
+  pointer-events:none;
+  border:0;
+  opacity:0;
+  transition:opacity .4s ease;
+}
+.hero-video-backdrop>video.is-playing{opacity:1}
+.hero-video-backdrop::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,.15) 65%,rgba(0,0,0,.1)),
+             linear-gradient(180deg,rgba(0,0,0,.24),transparent 26%,transparent 72%,rgba(0,0,0,.38));
+}
+.hero>.hero-meta,.hero>.hero-copy,.hero>.hero-bottom{position:relative;z-index:1}
+@media(max-width:800px){
+  .hero-video-backdrop>video{object-position:center center}
+  .hero-video-backdrop::after{
+    background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.09) 25%,rgba(0,0,0,.25) 57%,rgba(0,0,0,.62));
   }
 }
 @media(prefers-reduced-motion:reduce){
