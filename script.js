@@ -7,6 +7,6 @@ window.addEventListener("hashchange",cleanHash);
 
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",event=>{const targetId=a.getAttribute("href").slice(1);const target=document.getElementById(targetId);if(!target)return;event.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"",window.location.pathname+window.location.search);}));
 
-function updateTickerTime(){const now=new Date();const time=now.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});document.querySelectorAll(".ticker-time").forEach(el=>el.textContent=time)}
+function updateTickerTime(){const now=new Date();const time=now.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});document.querySelectorAll(".ticker-time").forEach(el=>{if(el.textContent!==time)el.textContent=time})}
 updateTickerTime();
 setInterval(updateTickerTime,30000);
