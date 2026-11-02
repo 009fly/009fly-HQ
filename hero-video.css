@@ -7,7 +7,7 @@
   z-index:0;
   overflow:hidden;
   pointer-events:none;
-  background:#080808 url("assets/009fly-smoke02-poster.jpg") center center / cover no-repeat;
+  background:#080808 url("assets/009fly-smoke02-poster.jpg?v=20261101-smooth") center center / cover no-repeat;
 }
 .hero-video-backdrop>video{
   position:absolute;
