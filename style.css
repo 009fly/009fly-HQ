@@ -156,10 +156,19 @@
   .release-log summary{gap:5px;white-space:nowrap;touch-action:manipulation}
   .release-log-plus{font-size:14px}
   .release-log-panel{
-    bottom:calc(100% + 14px);
-    width:min(490px,calc(100vw - 32px));
+    /* Center the expanded log in the visible phone viewport, not the footer item. */
+    position:fixed;
+    top:50%;
+    left:50%;
+    right:auto;
+    bottom:auto;
+    transform:translate(-50%,-50%);
+    width:calc(100vw - 32px);
+    max-width:490px;
     max-height:min(70dvh,520px);
+    box-sizing:border-box;
     padding:18px 16px;
+    z-index:100;
   }
   .release-log-heading{font-size:9px;gap:8px;padding-bottom:12px}
   .release-log-entries{max-height:min(48dvh,350px)}
