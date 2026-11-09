@@ -185,3 +185,9 @@
 
 /* 009fly performance: prevent clock digit width changes from jostling the ticker. */
 .ticker-time{font-variant-numeric:tabular-nums}
+
+/* flyOS HQ introduction: one line where card width permits, wrap naturally on narrow viewports. */
+#portfolio .portfolio-intro{white-space:normal;overflow-wrap:normal}
+@media(min-width:1050px){
+ #portfolio .portfolio-intro{white-space:nowrap;font-size:clamp(11px,1.04vw,14px);letter-spacing:-.015em}
+}
