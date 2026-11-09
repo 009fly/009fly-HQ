@@ -1,9 +1,24 @@
 const toggle=document.querySelector(".menu-toggle");const links=document.querySelector(".nav-links");if(toggle){toggle.addEventListener("click",()=>{const open=links.classList.toggle("open");toggle.setAttribute("aria-expanded",open)})}document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
 
-// Keep this one-page site at the clean root URL while preserving section scrolling.
-function cleanHash(){if(window.location.hash){history.replaceState(null,"",window.location.pathname+window.location.search)}}
-cleanHash();
-window.addEventListener("hashchange",cleanHash);
+// Honor incoming links (including flyOS → #contact) before cleaning the URL.
+// Previously removing the fragment on first load prevented deep links from scrolling.
+function scrollToIncomingSection(){
+  const hash=window.location.hash;
+  if(!hash||hash==="#")return;
+  let id;
+  try{id=decodeURIComponent(hash.slice(1))}catch(_){return}
+  const target=document.getElementById(id);
+  if(!target)return;
+  window.requestAnimationFrame(()=>{
+    target.scrollIntoView({behavior:"auto",block:"start"});
+    history.replaceState(null,"",window.location.pathname+window.location.search);
+  });
+}
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",scrollToIncomingSection,{once:true});
+}else{scrollToIncomingSection();}
+window.addEventListener("hashchange",scrollToIncomingSection);
+window.addEventListener("pageshow",scrollToIncomingSection);
 
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",event=>{const targetId=a.getAttribute("href").slice(1);const target=document.getElementById(targetId);if(!target)return;event.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"",window.location.pathname+window.location.search);}));
 
