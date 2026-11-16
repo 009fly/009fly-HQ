@@ -99,3 +99,15 @@
  #music .hq-media-controls{display:flex;justify-content:flex-end}
  #music .hq-media-grid{max-width:none;grid-template-columns:none;grid-auto-columns:max(280px,84%);gap:14px}
 }
+
+/* Uniform section headers: Management is the spacing reference.
+   Use real ticker clearance, not padding hidden behind the fixed navigation. */
+:root{--hq-section-top:20px;--hq-section-label-height:14px;--hq-section-rule-gap:16px;--hq-header-clearance:106px}
+#intel,#music,#management,#contact{padding-top:var(--hq-section-top)}
+#intel,#music,#management,#portfolio,#services,#contact{scroll-margin-top:var(--hq-header-clearance)}
+#portfolio .gateway-card{padding-top:var(--hq-section-top)}
+#intel .section-head,#music .section-head,#management .section-head,#contact .section-head,
+#portfolio .gateway-card>.mono:first-child{line-height:var(--hq-section-label-height);padding-bottom:var(--hq-section-rule-gap)}
+@media(max-width:800px){
+ :root{--hq-section-top:22px;--hq-header-clearance:96px}
+}
