@@ -111,3 +111,16 @@
 @media(max-width:800px){
  :root{--hq-section-top:22px;--hq-header-clearance:96px}
 }
+
+/* Equal black space above and below the media row. Preserve all player sizes. */
+#music{--hq-media-space:56px;padding-bottom:var(--hq-media-space)}
+#music .hq-music-intro{margin-bottom:var(--hq-media-space)}
+#music .hq-media-grid{margin-block:0}
+@media(max-width:800px){
+ /* The swipe controls occupy 36px, with 8px above and 12px below.
+    The carousel's 10px bottom padding counts toward the matching lower gap. */
+ #music .hq-music-intro{margin-bottom:8px}
+ #music .hq-media-controls{height:36px;margin:0 0 12px}
+ #music .hq-media-grid{padding-bottom:10px}
+ #music{padding-bottom:calc(var(--hq-media-space) - 10px)}
+}
