@@ -57,3 +57,30 @@
  .hq-media-title{font-size:10px}
 }
 @media(max-width:360px){.hq-media-grid{grid-auto-columns:100%}.hq-media-swipe>span:first-child{display:none}.hq-media-controls{font-size:8px}}
+
+/* HQ final polish: center presence in the free header space and simplify players. */
+.hq-nav-left{flex:1 1 auto;gap:0;min-width:0}
+.hq-nav-left .brand{flex:none}
+.hq-presence{margin-inline:auto;padding-inline:8px}
+.hq-presence-dot{background:#424242;box-shadow:none}
+.hq-presence[data-state="live"] .hq-presence-dot{background:#40dd83;animation:hq-agent-pulse 2.6s ease-in-out infinite}
+.hq-presence[data-state="dormant"] .hq-presence-dot{background:#424242;box-shadow:none;animation:none}
+@keyframes hq-agent-pulse{0%,100%{opacity:.8;box-shadow:0 0 3px #40dd8340}50%{opacity:1;box-shadow:0 0 8px 2px #40dd8360}}
+@media(prefers-reduced-motion:reduce){.hq-presence[data-state="live"] .hq-presence-dot{animation:none;box-shadow:0 0 5px #40dd8370}}
+#intel .hq-intel-single .intel-card.featured{padding-bottom:44px}
+#intel .hq-intel-single .hq-intel-launch{margin-top:24px}
+.hq-media-grid{max-width:1240px;margin-inline:auto;gap:16px;align-items:start}
+.hq-media-card{background:none;border:0;border-radius:0;padding:0;gap:10px}
+.hq-media-player{height:auto;min-height:0;aspect-ratio:16/9;background:transparent;border-radius:8px}
+.hq-media-card[data-platform="spotify"] .hq-media-player{aspect-ratio:auto;height:152px}
+.hq-media-card[data-platform="youtube"] .hq-media-player{height:auto;min-height:200px}
+.hq-media-title{display:block;min-height:0;margin:0;color:#f2d400;font:500 10px "DM Mono",monospace;letter-spacing:.05em;line-height:1.4}
+@media(min-width:801px) and (max-width:1199px){.hq-media-grid{max-width:780px;gap:20px}}
+@media(max-width:800px){
+ .hq-nav-left{flex:1 1 auto;gap:0}
+ .hq-presence{margin-inline:auto}
+ .hq-media-grid{max-width:none;margin-inline:0;gap:14px;grid-auto-columns:84%;padding-bottom:10px}
+ .hq-media-card{padding:0;gap:10px}
+ #intel .hq-intel-single .intel-card.featured{padding-bottom:34px}
+}
+@media(max-width:360px){.hq-media-grid{grid-auto-columns:96%}}
