@@ -181,3 +181,34 @@
   background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
  }
 }
+
+/* Oakland / Green + Gold — exact flyOS theme tokens, scoped to Latest Intel. */
+#intel{
+ --hq-oakland-accent:#f8d800;
+ --hq-oakland-bg:#06150f;
+ --hq-oakland-ink:#f6f5e9;
+ --hq-oakland-muted:#bbccbb;
+ --hq-oakland-line:rgba(203,237,205,.21);
+ --hq-oakland-glow:rgba(1,104,63,.32);
+ background:var(--hq-oakland-bg);color:var(--hq-oakland-ink);
+ border-bottom-color:var(--hq-oakland-line);
+}
+#intel .section-head{border-color:var(--hq-oakland-line)}
+#intel .section-head .muted{color:var(--hq-oakland-muted)}
+#intel .hq-intel-single{background:transparent}
+#intel .hq-intel-single .intel-card.featured{
+ background:radial-gradient(ellipse at 40% 20%,var(--hq-oakland-glow),transparent 68%),linear-gradient(120deg,var(--hq-oakland-bg),var(--hq-oakland-bg));
+ border:1px solid var(--hq-oakland-line);
+ color:var(--hq-oakland-ink);
+}
+#intel .hq-intel-single .intel-card.featured::before{
+ background-image:linear-gradient(rgba(203,237,205,.065) 1px,transparent 1px),linear-gradient(90deg,rgba(203,237,205,.065) 1px,transparent 1px);
+}
+#intel .hq-intel-single .intel-card.featured p{color:var(--hq-oakland-muted)}
+#intel .hq-intel-single .tag,#intel .hq-intel-launch{color:var(--hq-oakland-accent)}
+#intel .hq-intel-launch:hover,#intel .hq-intel-launch:focus-visible{color:var(--hq-oakland-ink)}
+@media(max-width:800px){
+ #intel .hq-intel-single .intel-card.featured::before{
+  background-image:linear-gradient(rgba(203,237,205,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(203,237,205,.04) 1px,transparent 1px);
+ }
+}
