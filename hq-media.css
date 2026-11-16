@@ -124,3 +124,29 @@
  #music .hq-media-grid{padding-bottom:10px}
  #music{padding-bottom:calc(var(--hq-media-space) - 10px)}
 }
+
+/* Flush navigation panels: every section covers at least the usable viewport.
+   Larger content may grow naturally rather than clipping on short displays. */
+#intel,#music,#management,#portfolio,#contact{
+ min-height:calc(100vh - var(--hq-header-clearance));
+ min-height:calc(100dvh - var(--hq-header-clearance));
+}
+#intel{display:flex;flex-direction:column;padding-bottom:var(--hq-section-top)}
+#intel .hq-intel-single{flex:1;min-height:0;align-items:stretch}
+#music{display:flex;flex-direction:column;padding-bottom:0;--hq-media-space:clamp(24px,6.2vh,56px)}
+#music .section-head{flex:none}
+#music .hq-music-intro{flex:none;margin-top:clamp(24px,6.4vh,58px);margin-bottom:0}
+#music .hq-media-stage{display:flex;flex:1 0 auto;flex-direction:column;justify-content:center;min-width:0;padding-block:var(--hq-media-space)}
+#music .hq-media-stage .hq-media-grid{width:100%;margin-block:0}
+@media(min-width:801px){
+ #music .hq-music-intro h2{font-size:clamp(48px,min(6.3vw,11vh),100px)}
+ #portfolio.gateway{align-items:stretch}
+}
+@media(max-width:800px){
+ #music{--hq-media-space:32px}
+ #music .hq-music-intro{margin-top:38px;margin-bottom:0}
+ #music .hq-media-stage{padding-block:var(--hq-media-space)}
+ #music .hq-media-controls{height:36px;margin:0 0 12px}
+ #music .hq-media-stage .hq-media-grid{padding-bottom:10px}
+ #portfolio .gateway-card{min-height:calc(100dvh - var(--hq-header-clearance))}
+}
