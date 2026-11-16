@@ -151,17 +151,15 @@
  #portfolio .gateway-card{min-height:calc(100dvh - var(--hq-header-clearance))}
 }
 
-/* Featured music: headline and copy at left, two players centered at right. */
-#music .hq-music-layout{flex:1 0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,6vw,100px);padding-block:clamp(24px,5vh,48px);min-width:0}
-#music .hq-music-layout .hq-music-intro{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:24px;margin:0;min-width:0;min-height:0}
-#music .hq-music-layout .hq-music-intro h2{margin:0}
-#music .hq-music-layout .section-copy{align-self:flex-start;width:100%;padding:0}
-#music .hq-music-layout .section-copy>p{margin:0;max-width:490px}
-#music .hq-music-layout .hq-media-stage{padding:0;min-width:0;justify-content:center;align-items:center}
-#music .hq-music-layout .hq-media-grid{display:grid;grid-template-columns:minmax(0,1fr);max-width:420px;width:100%;gap:16px;margin:0 auto;padding:0;overflow:visible}
-@media(max-width:800px){
- #music .hq-music-layout{grid-template-columns:minmax(0,1fr);align-content:center;gap:28px;padding-block:38px}
- #music .hq-music-layout .hq-music-intro{gap:22px}
- #music .hq-music-layout .hq-media-stage{align-items:stretch}
- #music .hq-music-layout .hq-media-grid{max-width:none;grid-template-columns:none;grid-auto-columns:min(100%,max(280px,84%));gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}
+/* Desktop-only featured releases. Mobile keeps its original four-player carousel. */
+#music .hq-music-layout{display:contents}
+@media(min-width:801px){
+ #music .hq-music-layout{flex:1 0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,6vw,100px);padding-block:clamp(24px,5vh,48px);min-width:0}
+ #music .hq-music-layout .hq-music-intro{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:24px;margin:0;min-width:0;min-height:0}
+ #music .hq-music-layout .hq-music-intro h2{margin:0}
+ #music .hq-music-layout .section-copy{align-self:flex-start;width:100%;padding:0}
+ #music .hq-music-layout .section-copy>p{margin:0;max-width:490px}
+ #music .hq-music-layout .hq-media-stage{padding:0;min-width:0;justify-content:center;align-items:center}
+ #music .hq-music-layout .hq-media-grid{display:grid;grid-template-columns:minmax(0,1fr);max-width:420px;width:100%;gap:16px;margin:0 auto;padding:0;overflow:visible}
+ #music .hq-media-card.hq-mobile-only{display:none}
 }
