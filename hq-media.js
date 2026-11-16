@@ -22,8 +22,8 @@
   try{
    const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:apiKey},body:JSON.stringify({visitor}),cache:'no-store',signal:AbortSignal.timeout(10000)});
    if(!r.ok)throw Error('Unavailable');const data=await r.json();if(!Number.isSafeInteger(data.count)||data.count<0)throw Error('Invalid count');
-   count.textContent=data.count.toLocaleString();label.textContent='ONLINE';counter.dataset.state='live';lastGood=Date.now();
-  }catch{if(Date.now()-lastGood>60000){count.textContent='—';label.textContent='ONLINE';counter.dataset.state='unavailable';}}
+   count.textContent=data.count.toLocaleString();label.textContent=data.count===1?'AGENT ONLINE':'AGENTS ONLINE';counter.dataset.state=data.count>0?'live':'dormant';lastGood=Date.now();
+  }catch{if(Date.now()-lastGood>60000){count.textContent='—';label.textContent='AGENTS ONLINE';counter.dataset.state='unavailable';}}
   finally{pending=false;}
  }
  heartbeat();setInterval(heartbeat,25000);
