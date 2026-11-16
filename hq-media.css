@@ -85,10 +85,12 @@
 }
 @media(max-width:360px){.hq-media-grid{grid-auto-columns:96%}}
 
-/* Uniform compact media frames: retain YouTube's 200px minimum viewport. */
+/* Compact aligned media: Spotify's visible 152px height, scaled YouTube viewport. */
 #music .hq-media-controls{display:none}
 #music .hq-media-grid{max-width:1180px;grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:16px}
-#music .hq-media-card .hq-media-player{width:100%;height:200px;min-height:200px;aspect-ratio:auto;border-radius:8px;overflow:hidden}
+#music .hq-media-card .hq-media-player{width:100%;height:152px;min-height:152px;aspect-ratio:auto;border-radius:8px;overflow:hidden}
+#music .hq-media-card[data-platform="youtube"] .hq-media-player iframe{width:131.578947%;height:200px;max-width:none;transform:scale(.76);transform-origin:top left;}
+#music .hq-media-card[data-platform="spotify"] .hq-media-player iframe{width:100%;height:152px;}
 #music .hq-media-card .hq-media-title{width:100%;text-align:center;min-height:0;margin:0}
 @media(min-width:801px) and (max-width:1299px){
  #music .hq-media-grid{max-width:700px;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
