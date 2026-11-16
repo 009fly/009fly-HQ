@@ -212,3 +212,6 @@
   background-image:linear-gradient(rgba(203,237,205,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(203,237,205,.04) 1px,transparent 1px);
  }
 }
+
+/* Match the flyOS wordmark: cream fly, Oakland gold OS. */
+#intel .hq-intel-single .intel-card.featured h2 .intel-os{color:var(--hq-oakland-accent)}
