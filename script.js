@@ -1,5 +1,12 @@
 const toggle=document.querySelector(".menu-toggle");const links=document.querySelector(".nav-links");if(toggle){toggle.addEventListener("click",()=>{const open=links.classList.toggle("open");toggle.setAttribute("aria-expanded",open)})}document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
 
+// Align section starts to the actual bottom of the fixed ticker, including resize/zoom.
+function alignHQSection(target,behavior){
+  const ticker=document.querySelector('.ticker');
+  const offset=target.id==='top'?0:(ticker?Math.max(0,ticker.getBoundingClientRect().bottom):0);
+  const top=Math.max(0,window.scrollY+target.getBoundingClientRect().top-offset);
+  window.scrollTo({top,behavior});
+}
 // Honor incoming links (including flyOS → #contact) before cleaning the URL.
 // Previously removing the fragment on first load prevented deep links from scrolling.
 function scrollToIncomingSection(){
@@ -10,7 +17,7 @@ function scrollToIncomingSection(){
   const target=document.getElementById(id);
   if(!target)return;
   window.requestAnimationFrame(()=>{
-    target.scrollIntoView({behavior:"auto",block:"start"});
+    alignHQSection(target,"instant");
     history.replaceState(null,"",window.location.pathname+window.location.search);
   });
 }
@@ -20,7 +27,7 @@ if(document.readyState==="loading"){
 window.addEventListener("hashchange",scrollToIncomingSection);
 window.addEventListener("pageshow",scrollToIncomingSection);
 
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",event=>{const targetId=a.getAttribute("href").slice(1);const target=document.getElementById(targetId);if(!target)return;event.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"",window.location.pathname+window.location.search);}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",event=>{const targetId=a.getAttribute("href").slice(1);const target=document.getElementById(targetId);if(!target)return;event.preventDefault();alignHQSection(target,window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth");history.replaceState(null,"",window.location.pathname+window.location.search);}));
 
 // Display each visitor's browser/device-local time; never rely on an upload,
 // server timestamp, or a free-running 30-second interval that can lag a minute.
