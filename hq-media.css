@@ -163,3 +163,21 @@
  #music .hq-music-layout .hq-media-grid{display:grid;grid-template-columns:minmax(0,1fr);max-width:420px;width:100%;gap:16px;margin:0 auto;padding:0;overflow:visible}
  #music .hq-media-card.hq-mobile-only{display:none}
 }
+
+/* Bring the flyOS desktop's faded 58px system grid into Latest Intel only. */
+#intel .hq-intel-single .intel-card.featured{
+ position:relative;isolation:isolate;overflow:hidden;
+}
+#intel .hq-intel-single .intel-card.featured::before{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+ background-size:58px 58px;background-position:center;
+ -webkit-mask-image:linear-gradient(transparent,black 25%,black 75%,transparent);
+ mask-image:linear-gradient(transparent,black 25%,black 75%,transparent);
+}
+#intel .hq-intel-single .intel-card.featured>*{position:relative;z-index:1}
+@media(max-width:800px){
+ #intel .hq-intel-single .intel-card.featured::before{
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+ }
+}
