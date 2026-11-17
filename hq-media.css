@@ -298,3 +298,12 @@
  #management .management-body .section-copy{align-self:stretch}
  #contact .hq-presence-privacy{display:none}
 }
+
+/* Mobile optical balance: match the two Management text gaps, and align
+   carousel navigation with the section's left edge. */
+@media(max-width:800px){
+ #music .hq-media-controls{justify-content:flex-start;max-width:none}
+ #music .hq-media-swipe{justify-content:flex-start}
+ #management .management-body h2{margin-bottom:26px}
+ #management .management-body .management-links{margin-top:26px}
+}
