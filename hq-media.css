@@ -237,22 +237,31 @@
  #portfolio #services .services-grid ul{gap:20px}
 }
 
-/* Header counter uses the same typography and responsive size as navigation. */
+/* Match the two social separators and restore compact, viewport-fitting media. */
 .hq-presence{font:500 10px "DM Mono",monospace;letter-spacing:.1em;color:#ddd;gap:5px}
 #hq-presence-count{color:inherit}
+.hq-presence-divider{display:none}
 @media(min-width:801px){
- .hq-presence{margin-left:auto;margin-right:0;padding:0 16px 0 8px}
- .hq-presence::after{content:"";display:block;width:1px;height:12px;background:#343434;margin-left:11px;flex:none}
- .hq-nav-left{margin-right:0}
- #music .hq-music-layout .hq-media-card .hq-media-player{height:480px;min-height:480px}
- #music .hq-music-layout .hq-media-card[data-platform="spotify"] .hq-media-player iframe,
- #music .hq-music-layout .hq-media-card[data-platform="youtube"] .hq-media-player iframe{
-  width:100%;height:100%;max-width:100%;transform:none;
- }
- #portfolio #services .services-description,
- #portfolio #services .services-grid{margin-top:12px}
+ .nav{--hq-nav-gap:24px}
+ .nav .nav-links{gap:var(--hq-nav-gap)}
+ .hq-nav-left{margin-right:var(--hq-nav-gap)}
+ .hq-presence{margin-left:auto;margin-right:0;padding:0}
+ .hq-presence::after{content:none}
+ .nav .hq-presence-divider{display:inline-block}
+ #music .hq-music-layout{padding-block:clamp(12px,3vh,26px)}
+ #music .hq-music-layout .hq-media-grid{--hq-compact-height:152px}
+ #music .hq-music-layout .hq-media-card .hq-media-player{height:var(--hq-compact-height);min-height:var(--hq-compact-height)}
+ #music .hq-music-layout .hq-media-card[data-platform="spotify"] .hq-media-player iframe{width:100%;height:var(--hq-compact-height);max-width:100%;transform:none}
+ #music .hq-music-layout .hq-media-card[data-platform="youtube"] .hq-media-player iframe{width:131.578947%;height:200px;max-width:none;transform:scale(.76);transform-origin:top left}
+ #portfolio #services .services-description{margin-top:9px}
+ #portfolio #services .services-grid{margin-top:15px}
+}
+/* Spotify's legacy landscape size, only when both players fit without extending the section. */
+@media(min-width:801px) and (min-height:740px){
+ #music .hq-music-layout .hq-media-grid{--hq-compact-height:232px}
+ #music .hq-music-layout .hq-media-card[data-platform="youtube"] .hq-media-player iframe{width:100%;height:232px;max-width:100%;transform:none}
 }
 @media(min-width:801px) and (max-width:1240px){
- .hq-presence{font-size:9px;letter-spacing:.045em;padding-right:8px}
- .hq-presence::after{margin-left:6px}
+ .nav{--hq-nav-gap:clamp(8px,1.3vw,17px)}
+ .hq-presence{font-size:9px;letter-spacing:.045em}
 }
