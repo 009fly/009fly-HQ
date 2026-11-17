@@ -215,3 +215,24 @@
 
 /* Match the flyOS wordmark: cream fly, Oakland gold OS. */
 #intel .hq-intel-single .intel-card.featured h2 .intel-os{color:var(--hq-oakland-accent)}
+
+/* Desktop refinement: crisp native Spotify rendering, a slightly left-shifted
+   media stack, and more breathing room in Services. Mobile is unchanged. */
+@media(min-width:801px){
+ #music .hq-music-layout .hq-media-grid{
+  margin-left:max(0px,calc((100% - 420px)/2 - 32px));
+  margin-right:auto;
+ }
+ #music .hq-music-layout .hq-media-card .hq-media-player{
+  height:152px;min-height:152px;
+ }
+ #music .hq-music-layout .hq-media-card[data-platform="spotify"] .hq-media-player iframe{
+  width:100%;height:152px;max-width:100%;transform:none;
+ }
+ #music .hq-music-layout .hq-media-card[data-platform="youtube"] .hq-media-player iframe{
+  width:131.578947%;height:200px;max-width:none;transform:scale(.76);transform-origin:top left;
+ }
+ #portfolio #services .services-description{margin-top:20px}
+ #portfolio #services .services-grid{margin-top:10px}
+ #portfolio #services .services-grid ul{gap:20px}
+}
