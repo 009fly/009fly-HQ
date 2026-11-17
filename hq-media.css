@@ -285,3 +285,16 @@
  #portfolio .gateway-card:first-child .portfolio-intro{margin-top:28px}
  #portfolio .gateway-card:first-child .button{margin-top:30px;margin-bottom:auto}
 }
+
+/* Mobile only: symmetrical carousel controls and centered Management content. */
+@media(max-width:800px){
+ #music .hq-media-controls{justify-content:center}
+ #music .hq-media-swipe{display:flex;align-items:center;justify-content:center;gap:10px}
+ #music #hq-media-position{text-align:center;min-width:7ch;font-variant-numeric:tabular-nums}
+ #management{display:flex;flex-direction:column;padding-bottom:22px}
+ #management .section-head{flex:none}
+ #management .management-body{flex:1 0 auto;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:0;padding-block:24px}
+ #management .management-body h2{margin:0 0 28px}
+ #management .management-body .section-copy{align-self:stretch}
+ #contact .hq-presence-privacy{display:none}
+}
