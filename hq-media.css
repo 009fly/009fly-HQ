@@ -265,3 +265,23 @@
  .nav{--hq-nav-gap:clamp(8px,1.3vw,17px)}
  .hq-presence{font-size:9px;letter-spacing:.045em}
 }
+
+/* Mobile only: seamless navigation, centered full-card carousel,
+   and a vertically balanced Portfolio feature. */
+@media(max-width:800px){
+ .nav #nav-links{top:calc(var(--hq-header-clearance) - 1px)}
+ .nav #nav-links .nav-divider{display:none}
+ #music .hq-media-stage{align-items:center}
+ #music .hq-media-controls{justify-content:center;width:100%;max-width:420px}
+ #music .hq-media-swipe{justify-content:center}
+ #music .hq-media-stage .hq-media-grid{
+  width:100%;max-width:420px;margin-inline:auto;
+  grid-auto-columns:100%;gap:14px;padding-inline:0;
+  scroll-snap-type:x mandatory;
+ }
+ #music .hq-media-grid .hq-media-card{scroll-snap-align:center}
+ #portfolio .gateway-card:first-child{justify-content:flex-start}
+ #portfolio .gateway-card:first-child h2{margin-top:auto;padding-top:30px}
+ #portfolio .gateway-card:first-child .portfolio-intro{margin-top:28px}
+ #portfolio .gateway-card:first-child .button{margin-top:30px;margin-bottom:auto}
+}
