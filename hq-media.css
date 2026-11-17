@@ -236,3 +236,23 @@
  #portfolio #services .services-grid{margin-top:10px}
  #portfolio #services .services-grid ul{gap:20px}
 }
+
+/* Header counter uses the same typography and responsive size as navigation. */
+.hq-presence{font:500 10px "DM Mono",monospace;letter-spacing:.1em;color:#ddd;gap:5px}
+#hq-presence-count{color:inherit}
+@media(min-width:801px){
+ .hq-presence{margin-left:auto;margin-right:0;padding:0 16px 0 8px}
+ .hq-presence::after{content:"";display:block;width:1px;height:12px;background:#343434;margin-left:11px;flex:none}
+ .hq-nav-left{margin-right:0}
+ #music .hq-music-layout .hq-media-card .hq-media-player{height:480px;min-height:480px}
+ #music .hq-music-layout .hq-media-card[data-platform="spotify"] .hq-media-player iframe,
+ #music .hq-music-layout .hq-media-card[data-platform="youtube"] .hq-media-player iframe{
+  width:100%;height:100%;max-width:100%;transform:none;
+ }
+ #portfolio #services .services-description,
+ #portfolio #services .services-grid{margin-top:12px}
+}
+@media(min-width:801px) and (max-width:1240px){
+ .hq-presence{font-size:9px;letter-spacing:.045em;padding-right:8px}
+ .hq-presence::after{margin-left:6px}
+}
