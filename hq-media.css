@@ -307,3 +307,8 @@
  #management .management-body h2{margin-bottom:26px}
  #management .management-body .management-links{margin-top:26px}
 }
+
+/* Mobile Latest Intel: intentional two-line introduction. */
+@media(max-width:800px){
+ #intel .hq-intel-single .intel-card.featured .hq-intel-subline{display:block;font-size:clamp(10px,3.2vw,13px)}
+}
